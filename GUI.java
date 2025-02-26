@@ -24,7 +24,7 @@ public class GUI extends JFrame {
         setSize(400, 600);
         
         try {
-            backgroundImage = ImageIO.read(new File("C:\\Users\\smgir\\OneDrive\\Desktop\\Uni\\Files\\FirstYearHack\\gamifyKCL\\background.png")); // Replace with your image path
+            backgroundImage = ImageIO.read(new File("")); // Replace with your image path
         } catch (IOException e) {
             e.printStackTrace();
         }
