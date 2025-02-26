@@ -1,6 +1,9 @@
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.*;
+import java.io.File;
+import java.io.IOException;
+import javax.imageio.ImageIO;
 
 public class GUI extends JFrame {
     
@@ -10,26 +13,41 @@ public class GUI extends JFrame {
     //Number of sgts attended
     private int sgtsAttended = 0;
     
+    private Image backgroundImage;
+    
     public GUI() {
-        JFrame frame = new JFrame("Gamify KCL");
+
+        // Set the title
+        setTitle("Gamify KCL");
         
         // Set the size of the window
-        frame.setSize(400, 600);
+        setSize(400, 600);
+        
+        try {
+            backgroundImage = ImageIO.read(new File("C:\\Users\\smgir\\OneDrive\\Desktop\\Uni\\Files\\FirstYearHack\\gamifyKCL\\background.png")); // Replace with your image path
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        
+         // Create a custom JPanel to paint the image
+        JPanel imagePanel = new JPanel() {
+            @Override
+            protected void paintComponent(Graphics g) {
+                super.paintComponent(g);  // Call the superclass method to ensure proper rendering
+
+                if (backgroundImage != null) {
+                    // Draw the image to cover the whole JPanel
+                    g.drawImage(backgroundImage, 0, 0, getWidth(), getHeight(), this);
+                }
+            }
+        };
         
         // Set the layout
-        frame.setLayout(new BorderLayout());
+        setLayout(new BoxLayout(getContentPane(), BoxLayout.Y_AXIS));
         
-        frame.getContentPane().setBackground(Color.CYAN);
-        /*
-        //create a custom panel with background image
-        BackgroundPanel backgroundPanel = new BackgroundPanel();
-        backgroundPanel.setLayout(new BorderLayout()); 
-        
-        add(backgroundPanel.getImage());
-
         // Set the custom panel as the content pane
-        setContentPane(backgroundPanel);
-        */
+        setContentPane(imagePanel);
+
         // Create a panel to hold the level text
         JPanel levelPanel = new JPanel();
         levelPanel.setLayout(new FlowLayout());
@@ -42,15 +60,16 @@ public class GUI extends JFrame {
         JLabel labelLevel = new JLabel("");
         levelPanel.add(labelLevel);
         
-        frame.add(levelPanel, BorderLayout.NORTH);
+        add(levelPanel);
         
         // Create a panel to hold the buttons
         JPanel buttonPanel = new JPanel();
         buttonPanel.setLayout(new FlowLayout());
+        buttonPanel.setPreferredSize(new Dimension(400,60));
         
         // Create a lecture button
         JButton buttonLecture = new JButton("Attend Lecture");
-        buttonLecture.setPreferredSize(new Dimension(200, 50));
+        buttonLecture.setPreferredSize(new Dimension(120, 50));
         buttonPanel.add(buttonLecture);
         
         // Create an lecture output label
@@ -59,7 +78,7 @@ public class GUI extends JFrame {
         
         // Create a sgt button
         JButton buttonSgt = new JButton("Attend SGT");
-        buttonSgt.setPreferredSize(new Dimension(200, 50));
+        buttonSgt.setPreferredSize(new Dimension(120, 50));
         buttonPanel.add(buttonSgt);
         
         // Create an sgt output label
@@ -68,10 +87,26 @@ public class GUI extends JFrame {
         
         // Create a battle button
         JButton buttonBattle = new JButton("Battle");
-        buttonBattle.setPreferredSize(new Dimension(200, 50));
+        buttonBattle.setPreferredSize(new Dimension(120, 50));
         buttonPanel.add(buttonBattle);
         
-        frame.add(buttonPanel, BorderLayout.CENTER);
+        add(buttonPanel);
+        
+        JPanel transparentPanel = new JPanel() {
+            @Override
+            protected void paintComponent(Graphics g) {
+                super.paintComponent(g); // Calls the parent class paintComponent to ensure proper rendering
+                // You can add custom drawing here if needed
+            }
+        };
+        
+        // Set the background of the panel to transparent
+        transparentPanel.setOpaque(false);
+        
+        transparentPanel.setPreferredSize(new Dimension(100, 20));
+
+        // Add the transparent panel to the frame
+        add(transparentPanel);
         
          // Create a leadboard scroll pane
         String[] users = {"Option 1", "Option 2", "Option 3", "Option 4"};
@@ -79,7 +114,7 @@ public class GUI extends JFrame {
         JScrollPane scrollPane = new JScrollPane(leaderboard);
         // Set the preferred size of the scroll pane
         scrollPane.setPreferredSize(new Dimension(300, 200));
-        frame.add(scrollPane, BorderLayout.SOUTH);
+        add(scrollPane);
         
         // Add an action listener to the lecture button
         buttonLecture.addActionListener(new ActionListener() {
@@ -99,13 +134,13 @@ public class GUI extends JFrame {
         });
         
         // Set default close operation
-        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         
         //Center the window on the screen
-        frame.setLocationRelativeTo(null);
+        setLocationRelativeTo(null);
         
         // Make the window visible
-        frame.setVisible(true);
+        setVisible(true);
     }
 
     // Main method to run the GUI
