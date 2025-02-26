@@ -1,0 +1,19 @@
+#BlueJ class context
+comment0.target=Multi
+comment1.params=question\ answer
+comment1.target=Multi(java.lang.String,\ java.lang.String)
+comment2.params=answer
+comment2.target=void\ addMoreAnswer(java.lang.String)
+comment3.params=
+comment3.target=void\ addRandomAnswer()
+comment4.params=
+comment4.target=java.lang.String\ getQuestion()
+comment5.params=
+comment5.target=java.lang.String\ getAnswer()
+comment6.params=num
+comment6.target=boolean\ chooseAnswer(int)
+comment7.params=num
+comment7.target=java.lang.String\ getChoice(int)
+comment8.params=
+comment8.target=java.util.ArrayList\ geChoices()
+numComments=9

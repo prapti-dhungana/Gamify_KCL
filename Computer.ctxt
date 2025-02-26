@@ -1,0 +1,11 @@
+#BlueJ class context
+comment0.target=Computer
+comment1.params=question
+comment1.target=Computer(Multi)
+comment2.params=
+comment2.target=void\ answerQuestion()
+comment3.params=question
+comment3.target=void\ newQuestion(Multi)
+comment4.params=
+comment4.target=int\ getRight()
+numComments=5
