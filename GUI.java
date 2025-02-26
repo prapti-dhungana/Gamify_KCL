@@ -11,22 +11,25 @@ public class GUI extends JFrame {
     private int sgtsAttended = 0;
     
     public GUI() {
-        // Set the title
-        setTitle("Gamify KCL");
+        JFrame frame = new JFrame("Gamify KCL");
         
         // Set the size of the window
-        setSize(400, 600);
+        frame.setSize(400, 600);
         
         // Set the layout
-        setLayout(new BorderLayout());
+        frame.setLayout(new BorderLayout());
         
+        frame.getContentPane().setBackground(Color.CYAN);
+        /*
         //create a custom panel with background image
         BackgroundPanel backgroundPanel = new BackgroundPanel();
-        backgroundPanel.setLayout(new BorderLayout());  // You can use any layout you want
+        backgroundPanel.setLayout(new BorderLayout()); 
         
+        add(backgroundPanel.getImage());
+
         // Set the custom panel as the content pane
         setContentPane(backgroundPanel);
-        
+        */
         // Create a panel to hold the level text
         JPanel levelPanel = new JPanel();
         levelPanel.setLayout(new FlowLayout());
@@ -39,7 +42,7 @@ public class GUI extends JFrame {
         JLabel labelLevel = new JLabel("");
         levelPanel.add(labelLevel);
         
-        add(levelPanel, BorderLayout.NORTH);
+        frame.add(levelPanel, BorderLayout.NORTH);
         
         // Create a panel to hold the buttons
         JPanel buttonPanel = new JPanel();
@@ -63,7 +66,12 @@ public class GUI extends JFrame {
         JLabel outputLabelSgt = new JLabel("");
         buttonPanel.add(outputLabelSgt);
         
-        add(buttonPanel, BorderLayout.CENTER);
+        // Create a battle button
+        JButton buttonBattle = new JButton("Battle");
+        buttonBattle.setPreferredSize(new Dimension(200, 50));
+        buttonPanel.add(buttonBattle);
+        
+        frame.add(buttonPanel, BorderLayout.CENTER);
         
          // Create a leadboard scroll pane
         String[] users = {"Option 1", "Option 2", "Option 3", "Option 4"};
@@ -71,7 +79,7 @@ public class GUI extends JFrame {
         JScrollPane scrollPane = new JScrollPane(leaderboard);
         // Set the preferred size of the scroll pane
         scrollPane.setPreferredSize(new Dimension(300, 200));
-        add(scrollPane, BorderLayout.SOUTH);
+        frame.add(scrollPane, BorderLayout.SOUTH);
         
         // Add an action listener to the lecture button
         buttonLecture.addActionListener(new ActionListener() {
@@ -91,13 +99,13 @@ public class GUI extends JFrame {
         });
         
         // Set default close operation
-        setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         
         //Center the window on the screen
-        setLocationRelativeTo(null);
+        frame.setLocationRelativeTo(null);
         
         // Make the window visible
-        setVisible(true);
+        frame.setVisible(true);
     }
 
     // Main method to run the GUI
